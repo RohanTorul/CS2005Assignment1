@@ -1,0 +1,31 @@
+TO RUN THE PROGRAM:
+In LINUX:
+Open Terminal in the directory containing the directory Assignment1 which contains the .java files
+Run pwd | xargs -I{} ./Assignment1/buildAndRun2.0.bash {}
+
+OR, if the script does not work,
+Open Terminal in the directory containing the directory Assignment1 which contains the .java files
+run javac ./Assignment1/*.java
+run java -cp . Assignment1.Driver
+
+In WINDOWS:
+Open Terminal in the directory containing the directory Assignment1 which contains the .java files
+run javac ./Assignment1/*.java
+run java -cp . Assignment1.Driver
+
+
+The Game has been tested on:
+JAVA:
+
+java 18.0.1.1 2022-04-22
+Java(TM) SE Runtime Environment (build 18.0.1.1+2-6)
+Java HotSpot(TM) 64-Bit Server VM (build 18.0.1.1+2-6, mixed mode, sharing)
+
+
+openjdk 11.0.28 2025-07-15
+OpenJDK Runtime Environment (build 11.0.28+6-post-Ubuntu-1ubuntu122.04.1)
+OpenJDK 64-Bit Server VM (build 11.0.28+6-post-Ubuntu-1ubuntu122.04.1, mixed mode, sharing)
+
+
+Windows 11(own machine)
+Ubuntu 22.04(own machine) 
