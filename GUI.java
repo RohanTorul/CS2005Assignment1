@@ -74,9 +74,9 @@ class ButtonGrid extends JPanel implements ActionListener{
         // reset pressed
         // reset player
         // reset score
+        this.score = 0;
         this.frozen = false;
         frozen = false;
-        this.score = 0;
         for(int i = 0; i < 5 ; i++){
             for(int j = 0; j < 5; j++){
                 GridNumbers[i][j] = (int) (Math.random() * 5 + 1);
@@ -92,8 +92,8 @@ class ButtonGrid extends JPanel implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e){
         CustomButton clicked = (CustomButton)e.getSource();
-        System.out.println("Player: "+ (p1 ? "1" : "2") + " clicked " + " Row: " + clicked.getRow() + " Col: " + clicked.getCol());
-        System.out.println("Frozen is " + this.frozen);
+        //System.out.println("Player: "+ (p1 ? "1" : "2") + " clicked " + " Row: " + clicked.getRow() + " Col: " + clicked.getCol());
+        //System.out.println("Frozen is " + this.frozen);
         if(clicked.isPressed()|| this.frozen) return;
         clicked.setPressed(clicked.isPressed() || true);
         this.score += GridNumbers[clicked.getRow()][clicked.getCol()];
@@ -141,6 +141,10 @@ public class GUI extends JFrame implements ActionListener{
     private JButton helpButton;
     private JLabel PlayerLabel;
     private JLabel ScoreLabel;
+    private JLabel RoundsPlayerOneWonLabel;
+    private JLabel RoundsPlayerTwoWonLabel;
+    private int RoundsPlayerOneWon;
+    private int RoundsPlayerTwoWon;
     public boolean ISRUNNING = true;
     public GUI() {
         // this.addWindowListener(new WindowListener(){
@@ -158,11 +162,15 @@ public class GUI extends JFrame implements ActionListener{
         //     public void windowDeactivated(WindowEvent e) {}
         // }
         // );
-        this.setSize(800,800);
+        this.setSize(900,900);
         this.setTitle("Rohan's Pontoon game");
         setLocationRelativeTo(null);
         this.setBackground(Color.decode("#303952"));
         getContentPane().setBackground(Color.decode("#f19066"));
+
+        RoundsPlayerOneWon = 0;
+        RoundsPlayerTwoWon = 0;
+
         TopPanel = new JPanel();
         TopPanel.setBackground(Color.decode("#f19066"));
         TopPanel.setLayout(new FlowLayout(FlowLayout.CENTER,800/30,0));
@@ -180,12 +188,22 @@ public class GUI extends JFrame implements ActionListener{
 
         MiddlePanel = new ButtonGrid();
         BottomPanel = new JPanel();
+        BottomPanel.setLayout(new BorderLayout(30,0));
         BottomPanel.setBackground(Color.decode("#f19066"));
         BottomButton = new JButton("Start/Reset Game");
         BottomButton.setFont(new Font("Arial", Font.BOLD, 20));
         BottomButton.setBackground(Color.decode("#e15f41"));
-        BottomPanel.add(BottomButton);
+        
         BottomButton.addActionListener(this);
+
+        RoundsPlayerOneWonLabel = new JLabel("P1 wins: 0");
+        RoundsPlayerOneWonLabel.setFont(new Font("Arial", Font.BOLD, 20));
+        RoundsPlayerTwoWonLabel = new JLabel("P2 wins: 0");
+        RoundsPlayerTwoWonLabel.setFont(new Font("Arial", Font.BOLD, 20));
+        BottomPanel.add(RoundsPlayerOneWonLabel, BorderLayout.WEST);
+        BottomPanel.add(BottomButton, BorderLayout.CENTER);
+        BottomPanel.add(RoundsPlayerTwoWonLabel, BorderLayout.EAST);
+
         getContentPane().setLayout(new BorderLayout(-1,-1));
         getContentPane().add(TopPanel, BorderLayout.NORTH);
         getContentPane().add(MiddlePanel, BorderLayout.CENTER);
@@ -207,10 +225,18 @@ public class GUI extends JFrame implements ActionListener{
         this.ScoreLabel.setText("Score: " + currentScore);
         
         if(currentScore > 21){
+           if(!this.MiddlePanel.getfrozen()){
+               System.out.println("Player " + (!this.MiddlePanel.getPlayer() ? "1" : "2") + " wins!");
+               this.RoundsPlayerOneWon += this.MiddlePanel.getPlayer() ? 1 : 0;
+               this.RoundsPlayerTwoWon += !this.MiddlePanel.getPlayer() ? 1 : 0;
+           }
+           this.MiddlePanel.setfrozen(true);
            //System.out.println("Player " + (this.MiddlePanel.getPlayer() ? "1" : "2") + " wins!");
            BottomButton.setText(("Player " + (this.MiddlePanel.getPlayer() ? "1" : "2") + " wins! click to restart!"));
            this.PlayerLabel.setText("current Player: " + (this.MiddlePanel.getPlayer() ? "1" : "2") + "(Winner!)");
-           this.MiddlePanel.setfrozen(true);
+           
+           this.RoundsPlayerOneWonLabel.setText("P1 wins: " + this.RoundsPlayerOneWon);
+           this.RoundsPlayerTwoWonLabel.setText("P2 wins: " + this.RoundsPlayerTwoWon);
         }
         else{
             this.MiddlePanel.setfrozen(false);
@@ -228,8 +254,8 @@ public class GUI extends JFrame implements ActionListener{
         else if( e.getSource() == this.BottomButton){
             this.MiddlePanel.reset();
             this.MiddlePanel.setfrozen(false);
-            System.out.println("frozen: " + this.MiddlePanel.getfrozen());
-            System.out.println("Score: " + this.MiddlePanel.getScore());
+            //System.out.println("frozen: " + this.MiddlePanel.getfrozen());
+            //System.out.println("Score: " + this.MiddlePanel.getScore());
         }
        
     }
