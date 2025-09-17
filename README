@@ -1,7 +1,7 @@
 TO RUN THE PROGRAM:
 In LINUX:
 Open Terminal in the directory containing the directory Assignment1 which contains the .java files
-Run pwd | xargs -I{} ./Assignment1/buildAndRun2.0.bash {}
+Run ./Assignment1/buildAndRun2.0.bash {}
 
 OR, if the script does not work,
 Open Terminal in the directory containing the directory Assignment1 which contains the .java files
@@ -29,3 +29,4 @@ OpenJDK 64-Bit Server VM (build 11.0.28+6-post-Ubuntu-1ubuntu122.04.1, mixed mod
 
 Windows 11(own machine)
 Ubuntu 22.04(own machine) 
+Ubuntu (Labnet) 
