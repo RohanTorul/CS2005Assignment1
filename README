@@ -1,7 +1,7 @@
 TO RUN THE PROGRAM:
 In LINUX:
 Open Terminal in the directory containing the directory Assignment1 which contains the .java files
-Run ./Assignment1/buildAndRun2.0.bash {}
+Run ./Assignment1/buildAndRun2.0.bash
 
 OR, if the script does not work,
 Open Terminal in the directory containing the directory Assignment1 which contains the .java files
