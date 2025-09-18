@@ -3,6 +3,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
+// Extension of JButton Class to be able to track row and col, and whether it is pressed
 class CustomButton extends JButton{
     private int row;
     private int col;
@@ -28,6 +29,8 @@ class CustomButton extends JButton{
 
 }
 
+// The "Game" part of the window, contains the grid of buttons, as well as the score.
+// Implements the ActionListener interface for the buttons.
 class ButtonGrid extends JPanel implements ActionListener{
     private boolean p1;
     private CustomButton[][] GridButtons = new CustomButton[5][5];
@@ -103,7 +106,7 @@ class ButtonGrid extends JPanel implements ActionListener{
         p1=(!p1);
     }
 }
-
+// Help Page
 class HelpPage extends JFrame{
     public HelpPage(){
         this.setTitle("Help/Instructions");
@@ -132,7 +135,7 @@ class HelpPage extends JFrame{
         add(scrollPane);
     }
 }
-
+// The Main GUI Class. Combines all the Panels and features together and interfaces with them to make the game work.
 public class GUI extends JFrame implements ActionListener{
     private JPanel TopPanel; // Displays who's turn it is and the current score
     private ButtonGrid MiddlePanel; // Displays the grid of buttons
