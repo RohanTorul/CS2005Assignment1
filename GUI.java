@@ -36,15 +36,16 @@ class ButtonGrid extends JPanel implements ActionListener{
     private CustomButton[][] GridButtons = new CustomButton[5][5];
     private int[][] GridNumbers = new int[5][5];
     private int score = 0;
-    private boolean frozen = false;
+    private boolean frozen = true;
     public ButtonGrid(){
         p1 = Math.random() < 0.5;
         this.setLayout(new GridLayout(5,5,0,0));
         this.setSize(500,500);
         for(int i = 0; i < 5 ; i++){
             for(int j = 0; j < 5; j++){
-                GridNumbers[i][j] = (int) (Math.random() * 5 + 1);
-                GridButtons[i][j] = new CustomButton(i,j, (Integer.toString(GridNumbers[i][j])));
+                GridNumbers[i][j] = 0;
+                GridButtons[i][j] = new CustomButton(i,j, (""));
+                GridButtons[i][j].setFont(new Font("Arial", Font.BOLD, 20));
                 GridButtons[i][j].addActionListener(this);
                 GridButtons[i][j].setHorizontalTextPosition(SwingConstants.CENTER);
                 this.add(GridButtons[i][j]);
@@ -242,7 +243,7 @@ public class GUI extends JFrame implements ActionListener{
            this.RoundsPlayerTwoWonLabel.setText("P2 wins: " + this.RoundsPlayerTwoWon);
         }
         else{
-            this.MiddlePanel.setfrozen(false);
+            //this.MiddlePanel.setfrozen(false);
             this.PlayerLabel.setText("current Player: " + (this.MiddlePanel.getPlayer() ? "1" : "2")+"         ");
             BottomButton.setText("Start/Reset Game");
         }
